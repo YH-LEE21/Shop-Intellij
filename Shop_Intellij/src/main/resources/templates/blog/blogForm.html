@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+
+        h1{
+            text-align: center;
+        }
+        .carousel-inner > .item {
+            height: 350px;
+        }
+        .col-md{
+
+        }
+        .card{
+            width: 600px;
+        }
+        .margin{
+            margin:0 auto;
+            margin-bottom:30px;
+        }
+        .banner{
+            height: 300px;
+            position: absolute; top:0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-text{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .center{
+            text-align:center;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+    <h1>상품리뷰 Blog<a href="/blog/blogList/new" sec:authorize="isAuthenticated()">[리뷰작성하기]</a></h1>
+    <div class="col-md">
+        <th:block th:each="blog, status: ${blogItems}">
+            <div class="col-md-4 margin md-size" >
+                <div class="card" >
+                    <div class="card-body">
+                        <h4 class="card-title">[title:[[${blog.title}]]]</h4>
+                        <p class="card-text">[작성자:[[${blog.member.name}]]]</p>
+                        <p class="card-text">[작성날짜:[[${blog.regTime}]]]</p>
+                        <p>[리뷰내용]</p>
+                        <h4 class="card-text">[[${blog.content}]]</h4>
+                        <img th:if="${blog.imgUrl1} != null" th:src="${blog.imgUrl1}" class="card-img-top" th:alt="notImage" height="400">
+
+                        <img th:if="${blog.imgUrl2} != null" th:src="${blog.imgUrl2}" class="card-img-top" th:alt="notImage" height="400">
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+</div>
