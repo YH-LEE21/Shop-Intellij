@@ -1,2 +1,2 @@
-# MEMO VUE
+# SHOP INTELLIJ
 language
